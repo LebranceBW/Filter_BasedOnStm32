@@ -20,7 +20,7 @@ void DMA_Config(void)
 		buffer2Tx[i]=i;
 	DMA_InitTypeDef DMA1Channel4Structure=
 	{
-		.DMA_PeripheralBaseAddr=USART1_Tx,
+		.DMA_PeripheralBaseAddr=ADC_DR,
 		.DMA_MemoryBaseAddr=(u32)buffer2Tx,
 		.DMA_DIR=DMA_DIR_PeripheralDST,
 		.DMA_BufferSize=0xff,

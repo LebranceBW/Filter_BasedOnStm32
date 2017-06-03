@@ -1,0 +1,87 @@
+#ifndef __USERCONFIG_H
+#define __USERCONFIG_H
+/*8个LED接口定义*/
+#define RCC_GPIO_LED8                   RCC_APB2Periph_GPIOC    //LED使用的GPIO时钟
+#define LEDn                            8                       //LED数量为8
+#define GPIO_LED8                       GPIOC                   //LED使用的GPIO为PC
+
+#define DS1_PIN                         GPIO_Pin_0             	//DS1使用的GPIO管脚
+#define DS2_PIN                         GPIO_Pin_1							//DS2使用的GPIO管脚
+#define DS3_PIN                         GPIO_Pin_2  						//DS3使用的GPIO管脚
+#define DS4_PIN                         GPIO_Pin_3							//DS4使用的GPIO管脚
+#define DS5_PIN                         GPIO_Pin_4             	//DS5使用的GPIO管脚
+#define DS6_PIN                         GPIO_Pin_5							//DS6使用的GPIO管脚
+#define DS7_PIN                         GPIO_Pin_6  						//DS7使用的GPIO管脚
+#define DS8_PIN                         GPIO_Pin_7							//DS8使用的GPIO
+
+/*DS18B20管脚定义*/
+
+#define RCC_GPIO_DS18B20                RCC_APB2Periph_GPIOC    //接在PC13
+#define GPIO_DS18B20                    GPIOC                   //使用的GPIO为PC
+#define GPIO_Pin_DS18B20 								GPIO_Pin_13
+
+//#define DQ_IN	          P5DIR &= ~BIT3		  //设置输入，DS18B20接单片机PC13口
+//#define DQ_OUT	        P5DIR |= BIT3		  	//设置输出
+#define DQ_CLR	        GPIO_ResetBits(GPIO_DS18B20,GPIO_Pin_DS18B20)	    //置低电平
+#define DQ_SET	        GPIO_SetBits(GPIO_DS18B20,GPIO_Pin_DS18B20)	      //置高电平
+#define DQ_R	          GPIO_ReadInputDataBit(GPIO_DS18B20, GPIO_Pin_DS18B20)		      //读电平
+
+/*2.8寸TFT触摸屏接口定义*/
+#define GPIO_TFT_DATA                   GPIOC    				         //数据口PC0~PC7
+#define RCC_GPIO_TFT                    RCC_APB2Periph_GPIOC
+
+#define GPIO_CTRA                   		GPIOA    				         //控制口
+#define RCC_GPIO_CTRA    		            RCC_APB2Periph_GPIOA
+#define GPIO_CTRB			              		GPIOB    				         //控制口
+#define RCC_GPIO_CTRB    								RCC_APB2Periph_GPIOB
+
+#define RS_CLR	        GPIO_ResetBits(GPIO_CTRA, GPIO_Pin_0)     //RS置低
+#define RS_SET	        GPIO_SetBits(GPIO_CTRA, GPIO_Pin_0)       //RS置高
+
+#define RW_CLR	        GPIO_ResetBits(GPIO_CTRA, GPIO_Pin_1)     //RW置低
+#define RW_SET	        GPIO_SetBits(GPIO_CTRA, GPIO_Pin_1)  		  //RW置高
+
+#define RD_CLR	        GPIO_ResetBits(GPIO_CTRB, GPIO_Pin_8)     //E置低
+#define RD_SET	        GPIO_SetBits(GPIO_CTRB, GPIO_Pin_8)       //E置高
+
+#define CS_CLR	        GPIO_ResetBits(GPIO_CTRB, GPIO_Pin_0)     //CS置低
+#define CS_SET	        GPIO_SetBits(GPIO_CTRB, GPIO_Pin_0)       //CS置高
+
+#define RST_CLR	        GPIO_ResetBits(GPIO_CTRB, GPIO_Pin_1)     //RST置低
+#define RST_SET	        GPIO_SetBits(GPIO_CTRB, GPIO_Pin_1)       //RST置高
+
+#define LE_CLR	        GPIO_ResetBits(GPIO_CTRB, GPIO_Pin_2)     //LE置低
+#define LE_SET	        GPIO_SetBits(GPIO_CTRB, GPIO_Pin_2)       //LE置高
+
+#define DataPort        GPIOC                     								//PC口为数据口
+
+
+/*全局变量-颜色代码*/
+
+#define White          0xFFFF           													//显示颜色代码
+#define Black          0x0000
+#define Blue           0x001F
+#define Blue2          0x051F
+#define Red            0xF800
+#define Magenta        0xF81F
+#define Green          0x07E0
+#define Cyan           0x7FFF
+#define Yellow         0xFFE0
+
+/*函数声明区*/
+void RCC_Configuration(void);
+void NVIC_Configuration(void);
+void Delay(vu32 nCount);
+void LED_Runing(u8 LED_NUM);
+void DQ_IN(void);
+void DQ_OUT(void);
+unsigned char DS18B20_Reset(void) ;
+unsigned char ds1820_read_byte(void);
+void ds1820_write_byte(unsigned char value);
+void ds1820_start(void);
+unsigned int ds1820_read_temp(void) ;
+void data_do(u16 temp_d);
+#endif
+
+
+

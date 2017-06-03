@@ -135,7 +135,14 @@ void PendSV_Handler(void)
 void SysTick_Handler(void)
 {
 }
-
+void ADC1_2_IRQHandler(void)
+{
+	MessagePackage_Struct  newMessage; 
+	newMessage.messagetype = ADInput_Message;
+	newMessage.messageContent = ADC_GetConversionValue(ADC1);
+	messageQueue_Obj.EnterQueue(newMessage);
+//	NVIC_ClearPendingIRQ( ADC1_2_IRQn );
+}
 /******************************************************************************/
 /*                 STM32F10x Peripherals Interrupt Handlers                   */
 /*  Add here the Interrupt Handler for the used peripheral(s) (PPP), for the  */

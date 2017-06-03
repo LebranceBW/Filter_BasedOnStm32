@@ -20,8 +20,8 @@
   */  
 
 /* Includes ------------------------------------------------------------------*/
-#include "messageQueue.h"
-#define ORDER 10
+#include "main.h"
+
 
 double filterCoefficients[ORDER] = {0,                                    
 0.016389135268014336,                 
@@ -36,22 +36,45 @@ double filterCoefficients[ORDER] = {0,
 
 int ADInput[ORDER] = {};//A/D数据存储区
 double DAOutput;//D/A输出
-	
-MessageQueue_Class messageQueue_Obj(30);
-	
-bool DMAFrom_AD_Var_Init()
-{
-	
-}	
+int earlisetVar = 0; //最早进入缓冲区的变量	
+
+//unsigned int const basePoint_X_Con = 20; unsigned int const basePoint_Y_Con = 220; //原点坐标
+//unsigned int const XAxis_Length_Con = 280; unsigned int const YAxis_Length_Con = 180;//横竖轴长度
+MessageQueue_Class messageQueue_Obj(30);//30长的消息队列
+Scope_Class Scope_Obj;
 int main(void)
 {
-	DMAFrom_AD_Var_Init();
-	messagePackage_Struct *currentMessagePackage=0;
-	if(messageQueue_Obj.QuiteQueue(currentMessagePackage)&&currentMessagePackage!=0)
-		switch(currentMessagePackage->messagetype)
-		{
-			case Null_Message: break;
-			case ADInput_Message: break;
-		};
+	adc1_Init();
+	MessagePackage_Struct *currentMessagePackage=0;
+//	TFT_Initial();
+//	CLR_Screen(Black);
+//	GUIline(basePoint_X_Con,basePoint_Y_Con,basePoint_X_Con+XAxis_Length_Con,basePoint_Y_Con,White);
+//	GUIline(basePoint_X_Con,basePoint_Y_Con,basePoint_X_Con,basePoint_Y_Con-YAxis_Length_Con,White);
+//	int count=0; //每十个点求个平均
+	while(1)
+	{
+		if(messageQueue_Obj.QuiteQueue(currentMessagePackage))
+			switch(currentMessagePackage->messagetype)
+			{
+				case Null_Message: break;
+				case ADInput_Message: 
+				{
+//					ADInput[count] = currentMessagePackage->messageContent;
+//					if(count==10)
+//					{
+//						 int temp;
+//							for(;count>0;count--)
+//										temp+=ADInput[count];
+//						Scope_Obj.InputData_Fun(temp/10);
+//					}220
+					Scope_Obj.InputData_Fun(currentMessagePackage->messageContent);
+					break;			
+				}
+				default: 
+				Scope_Obj.Scope_Refresh_Fun();	
+				break;
+			};
+			
+	}
 }
 

@@ -569,11 +569,6 @@
           <GroupName>User</GroupName>
           <Files>
             <File>
-              <FileName>stm32f10x_it.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\stm32f10x_it.c</FilePath>
-            </File>
-            <File>
               <FileName>Key.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\Key.c</FilePath>
@@ -599,9 +594,14 @@
               <FilePath>..\..\User\adc1.c</FilePath>
             </File>
             <File>
-              <FileName>dma.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\dma.c</FilePath>
+              <FileName>stm32f10x_it.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\User\stm32f10x_it.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TFT28Scope.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\User\TFT28Scope.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -612,6 +612,21 @@
               <FileName>readme.txt</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\Doc\readme.txt</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>TFT28</GroupName>
+          <Files>
+            <File>
+              <FileName>GUI.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\TFT28\GUI.c</FilePath>
+            </File>
+            <File>
+              <FileName>TFT28.C</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\TFT28\TFT28.C</FilePath>
             </File>
           </Files>
         </Group>
